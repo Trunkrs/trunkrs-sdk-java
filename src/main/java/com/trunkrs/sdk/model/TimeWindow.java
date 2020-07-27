@@ -18,12 +18,3 @@ public abstract class TimeWindow {
    */
   public abstract Date getClose();
 }
-
-@Getter
-class APIV1TimeWindow extends TimeWindow {
-  @SerializedName("from")
-  Date open;
-
-  @SerializedName("to")
-  Date close;
-}

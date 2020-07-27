@@ -17,7 +17,7 @@ public class ApiRequest {
   String url;
 
   @Getter
-  Map<String, String> headers = new HashMap<String, String>();
+  Map<String, String> headers;
 
   @Getter
   Parameters params;
@@ -26,15 +26,22 @@ public class ApiRequest {
   String body;
 
   public static class ApiRequestBuilder {
+    private Map<String, String> getHeaders() {
+      if (headers == null) {
+        headers = new HashMap<>();
+      }
+      return headers;
+    }
+
     public ApiRequestBuilder headers(Map<String, String> headers) {
-      this.headers.putAll(headers);
+      getHeaders().putAll(headers);
 
       return this;
     }
 
     public <Payload> ApiRequestBuilder body(Payload payload) {
       body = Serializer.get().serialize(payload);
-      headers.put("Content-Type", "application/json; charset=utf-8");
+      getHeaders().put("Content-Type", "application/json; charset=utf-8");
 
       return this;
     }

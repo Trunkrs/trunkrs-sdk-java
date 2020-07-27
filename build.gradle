@@ -41,10 +41,6 @@ tasks.withType(JavaCompile) {
     }
 }
 
-compileJava {
-    options.compilerArgs << "-Werror"
-}
-
 configurations.all {
 }
 

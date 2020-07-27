@@ -16,7 +16,7 @@ public enum StateReasonCode {
   inaccessibleAddress("DELIVER_ADDRESS_NOT_ACCESSIBLE");
 
   @Getter
-  private String code;
+  private final String code;
 
   StateReasonCode(String code) {
     this.code = code;

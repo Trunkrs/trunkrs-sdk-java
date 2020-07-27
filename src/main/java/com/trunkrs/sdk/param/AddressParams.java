@@ -9,7 +9,7 @@ public class AddressParams {
   String addressLine;
   String postalCode;
   String city;
-  String countryCode = "NL";
+  String countryCode;
   String email;
   String phoneNumber;
   String remarks;

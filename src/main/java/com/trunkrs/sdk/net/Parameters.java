@@ -9,7 +9,7 @@ import java.util.Map;
 
 @Builder
 public class Parameters {
-  private Map<String, String> params = new HashMap<>();
+  private Map<String, String> params;
 
   public static class ParametersBuilder {
     private Map<String, String> getParams() {
@@ -17,11 +17,6 @@ public class Parameters {
         params = new HashMap<>();
       }
       return params;
-    }
-
-    private ParametersBuilder params(Map<String, String> initial) {
-      this.params = initial;
-      return this;
     }
 
     /**

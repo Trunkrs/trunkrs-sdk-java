@@ -1,8 +1,5 @@
 package com.trunkrs.sdk.model;
 
-import com.google.gson.annotations.SerializedName;
-import lombok.Getter;
-
 public abstract class Address {
   /**
    * Get the name of the contact person of the address.
@@ -51,31 +48,4 @@ public abstract class Address {
    * @return The handling remarks.
    */
   public abstract String getRemarks();
-}
-
-@Getter
-class APIV1Address extends Address {
-  @SerializedName("name")
-  String contactName;
-
-  @SerializedName("address")
-  String addressLine;
-
-  @SerializedName("postCode")
-  String postal;
-
-  @SerializedName("city")
-  String city;
-
-  @SerializedName("country")
-  String countryCode;
-
-  @SerializedName("email")
-  String email;
-
-  @SerializedName("phoneNumber")
-  String phoneNumber;
-
-  @SerializedName("remarks")
-  String remarks;
 }

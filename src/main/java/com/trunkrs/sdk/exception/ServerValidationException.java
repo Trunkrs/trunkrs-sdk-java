@@ -5,9 +5,10 @@ import com.trunkrs.sdk.net.ApiResponse;
 import lombok.Getter;
 import lombok.val;
 
+@SuppressWarnings("serial")
 public class ServerValidationException extends Exception {
   @Getter
-  private class ServerValidationModel {
+  private static class ServerValidationModel {
     @SerializedName("message")
     String message;
   }

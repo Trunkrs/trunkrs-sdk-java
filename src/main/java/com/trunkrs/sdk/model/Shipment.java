@@ -6,8 +6,6 @@ import com.trunkrs.sdk.net.ApiResource;
 import com.trunkrs.sdk.net.Parameters;
 import com.trunkrs.sdk.param.ShipmentParams;
 
-import com.google.gson.annotations.SerializedName;
-import lombok.Getter;
 import lombok.SneakyThrows;
 import lombok.val;
 
@@ -112,7 +110,6 @@ public abstract class Shipment extends ApiResource {
 
   /**
    * Get the shipment id of the shipment.
-   * @deprecated The shipment id will be removed in favor of the Trunkrs number.
    * @return The shipment id.
    */
   public abstract int getId();
@@ -136,17 +133,10 @@ public abstract class Shipment extends ApiResource {
   public abstract Address getPickupAddress();
 
   /**
-   * Get the PDF label url for the label of the shipment.
-   * @deprecated This is a deprecated feature that will not be supported in the V2 API.
-   * @return The PDF label url.
-   */
-  public abstract String getLabelUrl();
-
-  /**
    * Get the timeslot for this shipment.
    * @return The timeslot for the shipment.
    */
-  public abstract Timeslot getTimeslot();
+  public abstract TimeSlot getTimeslot();
 
   /**
    * Cancels the shipment.
@@ -175,38 +165,5 @@ public abstract class Shipment extends ApiResource {
       getTrunkrsNr(),
       getDeliveryAddress().getPostal().replace(" ", "")
     );
-  }
-}
-
-@Getter
-class APIV1Shipment extends Shipment {
-  @SerializedName("id")
-  int id;
-
-  @SerializedName("trunkrsNr")
-  String trunkrsNr;
-
-  @SerializedName("labelUrl")
-  String labelUrl;
-
-  @SerializedName("recipient")
-  APIV1Address deliveryAddress;
-
-  @SerializedName("sender")
-  APIV1Address pickupAddress;
-
-  @SerializedName("timeSlot")
-  APIV1Timeslot timeslot;
-
-  @Override
-  public void cancel()
-    throws NotAuthorizedException, GeneralApiException, ShipmentNotFoundException {
-    Shipment.cancel(getId());
-  }
-
-  @Override
-  public ShipmentState getState()
-    throws NotAuthorizedException, GeneralApiException, ShipmentNotFoundException {
-    return ShipmentState.find(getId());
   }
 }

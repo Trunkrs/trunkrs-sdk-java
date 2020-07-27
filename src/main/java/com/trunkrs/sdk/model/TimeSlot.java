@@ -7,8 +7,6 @@ import com.trunkrs.sdk.exception.UnsupportedVersionException;
 import com.trunkrs.sdk.net.ApiResource;
 import com.trunkrs.sdk.net.Parameters;
 
-import com.google.gson.annotations.SerializedName;
-import lombok.Getter;
 import lombok.SneakyThrows;
 import lombok.val;
 
@@ -16,14 +14,14 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-public abstract class Timeslot extends ApiResource {
+public abstract class TimeSlot extends ApiResource {
   /**
    * Gets all the available time slots for the Netherlands.
    * @return A list of available time slots in the Netherlands.
    * @throws NotAuthorizedException Thrown when the credentials are invalid, not set or expired.
    * @throws GeneralApiException Thrown when the API responds with an unexpected answer.
    */
-  public static List<Timeslot> retrieve()
+  public static List<TimeSlot> retrieve()
     throws NotAuthorizedException, GeneralApiException {
     return retrieve("NL");
   }
@@ -36,16 +34,16 @@ public abstract class Timeslot extends ApiResource {
    * @throws GeneralApiException Thrown when the API responds with an unexpected answer.
    */
   @SneakyThrows(UnsupportedVersionException.class)
-  public static List<Timeslot> retrieve(String countryCode)
+  public static List<TimeSlot> retrieve(String countryCode)
     throws NotAuthorizedException, GeneralApiException {
     val params = Parameters.builder()
       .with("country", countryCode)
       .build();
 
-    Timeslot[] timeslots = null;
+    TimeSlot[] timeslots = null;
     switch (TrunkrsSDK.getApiVersion()) {
       case v1:
-        timeslots = get("timeslots", params, APIV1Timeslot[].class);
+        timeslots = get("timeslots", params, APIV1TimeSlot[].class);
         break;
       case v2:
         // Stub for V2, can never be called at this moment.
@@ -78,19 +76,4 @@ public abstract class Timeslot extends ApiResource {
    * @return The collection window for the time slot.
    */
   public abstract TimeWindow getCollectionWindow();
-}
-
-@Getter
-class APIV1Timeslot extends Timeslot {
-  @SerializedName("id")
-  int id;
-
-  @SerializedName("dataWindow")
-  Date cutOff;
-
-  @SerializedName("deliveryWindow")
-  APIV1TimeWindow deliveryWindow;
-
-  @SerializedName("collectionWindow")
-  APIV1TimeWindow collectionWindow;
 }

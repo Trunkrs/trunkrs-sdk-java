@@ -84,9 +84,9 @@ public abstract class ShipmentParams {
       switch (TrunkrsSDK.getApiVersion()) {
         case v1:
           return buildV1();
+        default:
+          return null;
       }
-
-      return null;
     }
   }
 

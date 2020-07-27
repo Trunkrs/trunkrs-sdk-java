@@ -2,6 +2,7 @@ package com.trunkrs.sdk.exception;
 
 import com.trunkrs.sdk.net.ApiResponse;
 
+@SuppressWarnings("serial")
 public class GeneralApiException extends Exception {
   private ApiResponse response = null;
 

@@ -7,13 +7,14 @@ import java.util.ArrayList;
 /**
  * Thrown when an invalid API version has been selected.
  */
+@SuppressWarnings("serial")
 public class UnsupportedVersionException extends Exception {
   public UnsupportedVersionException(String requested, ArrayList<APIVersion> supported) {
     super(
       String.format(
         "You requested an invalid API version: '%s'. Supported API versions are: %s.",
         requested,
-        String.join(", ", (String[]) supported.stream().map(Enum::toString).toArray())
+        String.join(", ", (String[]) supported.stream().map(Enum<APIVersion>::toString).toArray())
       )
     );
   }

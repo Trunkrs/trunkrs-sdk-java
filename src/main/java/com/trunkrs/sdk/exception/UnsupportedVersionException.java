@@ -1,6 +1,6 @@
 package com.trunkrs.sdk.exception;
 
-import com.trunkrs.sdk.TrunkrsSDK;
+import com.trunkrs.sdk.enumeration.APIVersion;
 
 import java.util.ArrayList;
 
@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * Thrown when an invalid API version has been selected.
  */
 public class UnsupportedVersionException extends Exception {
-  public UnsupportedVersionException(String requested, ArrayList<TrunkrsSDK.APIVersion> supported) {
+  public UnsupportedVersionException(String requested, ArrayList<APIVersion> supported) {
     super(
       String.format(
         "You requested an invalid API version: '%s'. Supported API versions are: %s.",

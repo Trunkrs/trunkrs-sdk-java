@@ -1,10 +1,15 @@
 package com.trunkrs.sdk.model;
 
 import com.google.gson.annotations.SerializedName;
-import com.trunkrs.sdk.model.enumeration.OwnerType;
+import com.trunkrs.sdk.enumeration.OwnerType;
 import lombok.Getter;
 
+import java.util.EnumSet;
+import java.util.stream.Stream;
+
 public abstract class PackageOwner {
+  protected final static EnumSet<OwnerType> ownerTypes = EnumSet.allOf(OwnerType.class);
+
   /**
    * Get the package owner type.
    * @return The package owner type.
@@ -71,7 +76,11 @@ class APIV1PackageOwner extends PackageOwner {
     if (typeName == null || typeName.isEmpty()) {
       return null;
     }
-    return Enum.valueOf(OwnerType.class, typeName);
+
+    return ownerTypes.stream()
+      .filter(type -> type.getCode().equals(typeName))
+      .findAny()
+      .orElse(null);
   }
 }
 

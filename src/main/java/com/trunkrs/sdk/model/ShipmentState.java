@@ -3,16 +3,20 @@ package com.trunkrs.sdk.model;
 import com.trunkrs.sdk.exception.GeneralApiException;
 import com.trunkrs.sdk.exception.NotAuthorizedException;
 import com.trunkrs.sdk.exception.ShipmentNotFoundException;
-import com.trunkrs.sdk.model.enumeration.StateCode;
-import com.trunkrs.sdk.model.enumeration.StateReasonCode;
+import com.trunkrs.sdk.enumeration.StateCode;
+import com.trunkrs.sdk.enumeration.StateReasonCode;
 import com.trunkrs.sdk.net.ApiResource;
 
 import com.google.gson.annotations.SerializedName;
 import lombok.Getter;
 
 import java.util.Date;
+import java.util.EnumSet;
 
 public abstract class ShipmentState extends ApiResource {
+  protected final static EnumSet<StateCode> stateCodes = EnumSet.allOf(StateCode.class);
+  protected final static EnumSet<StateReasonCode> stateReasonCodes = EnumSet.allOf(StateReasonCode.class);
+
   /**
    * Get the current state for the specified shipment id.
    * @param shipmentId The shipment id to fetch state for.
@@ -92,7 +96,11 @@ class APIV1ShipmentState extends ShipmentState {
     if (state.code == null || state.code.isEmpty()) {
       return null;
     }
-    return Enum.valueOf(StateCode.class, state.code);
+
+    return stateCodes.stream()
+      .filter(stateCode -> stateCode.getCode().equals(state.code))
+      .findAny()
+      .orElse(null);
   }
 
   @Override
@@ -100,6 +108,10 @@ class APIV1ShipmentState extends ShipmentState {
     if (state.reasonCode == null || state.reasonCode.isEmpty()) {
       return null;
     }
-    return Enum.valueOf(StateReasonCode.class, state.reasonCode);
+
+    return stateReasonCodes.stream()
+      .filter(stateReasonCode -> stateReasonCode.getCode().equals(state.reasonCode))
+      .findAny()
+      .orElse(null);
   }
 }

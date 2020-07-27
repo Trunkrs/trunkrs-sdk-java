@@ -1,29 +1,12 @@
 package com.trunkrs.sdk;
 
+import com.trunkrs.sdk.enumeration.APIVersion;
 import com.trunkrs.sdk.exception.UnsupportedVersionException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public abstract class TrunkrsSDK {
-  public enum APIVersion {
-    v1("v1"), v2("v2");
-
-    private String versionIdentifier;
-
-    APIVersion(String versionIdentifier) {
-      this.versionIdentifier = versionIdentifier;
-    }
-
-    /**
-     * Converts the enum value into a version identifier.
-     * @return The URL safe version identifier.
-     */
-    public String getVersionIdentifier() {
-      return versionIdentifier;
-    }
-  }
-
   private static final ArrayList<APIVersion> supportedVersions = new ArrayList<>(Arrays.asList(APIVersion.v1));
   private static volatile APIVersion apiVersion = APIVersion.v1;
 

@@ -55,9 +55,28 @@ public abstract class Timeslot extends ApiResource {
     return Arrays.asList(timeslots);
   }
 
+  /**
+   * Get the identifier of the timeslot.
+   * @return The identifier of the time slot.
+   */
   public abstract int getId();
+
+  /**
+   * Get the cut-off moment for the time slot.
+   * @return The cut-off moment.
+   */
   public abstract Date getCutOff();
+
+  /**
+   * Get the delivery window for the time slot.
+   * @return Get the delivery window for the time slot.
+   */
   public abstract TimeWindow getDeliveryWindow();
+
+  /**
+   * Get the collection window for the time slot.
+   * @return The collection window for the time slot.
+   */
   public abstract TimeWindow getCollectionWindow();
 }
 

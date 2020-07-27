@@ -1,8 +1,9 @@
 package com.trunkrs.sdk.param;
 
-import com.google.gson.annotations.SerializedName;
 import com.trunkrs.sdk.TrunkrsSDK;
 import com.trunkrs.sdk.exception.ShipmentWithoutParcelsException;
+
+import com.google.gson.annotations.SerializedName;
 import lombok.Builder;
 import lombok.val;
 

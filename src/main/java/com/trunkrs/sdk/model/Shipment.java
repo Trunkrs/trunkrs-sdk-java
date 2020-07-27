@@ -150,11 +150,19 @@ public abstract class Shipment extends ApiResource {
 
   /**
    * Cancels the shipment.
-   * @throws ShipmentNotFoundException Thrown when the specified shipment couldn't be found.
+   * @throws ShipmentNotFoundException Thrown when the shipment couldn't be found.
    * @throws NotAuthorizedException Thrown when the credentials are invalid, not set or expired.
    * @throws GeneralApiException Thrown when the API responds with an unexpected answer.
    */
   public abstract void cancel() throws NotAuthorizedException, GeneralApiException, ShipmentNotFoundException;
+
+  /**
+   * Gets the current state of the shipment.
+   * @throws ShipmentNotFoundException Thrown when the shipment couldn't be found.
+   * @throws NotAuthorizedException Thrown when the credentials are invalid, not set or expired.
+   * @throws GeneralApiException Thrown when the API responds with an unexpected answer.
+   */
+  public abstract ShipmentState getState() throws NotAuthorizedException, GeneralApiException, ShipmentNotFoundException;
 
   /**
    * Creates the tracking URL for the shipment.
@@ -190,8 +198,15 @@ class APIV1Shipment extends Shipment {
   @SerializedName("timeSlot")
   APIV1Timeslot timeslot;
 
+  @Override
   public void cancel()
     throws NotAuthorizedException, GeneralApiException, ShipmentNotFoundException {
     Shipment.cancel(getId());
+  }
+
+  @Override
+  public ShipmentState getState()
+    throws NotAuthorizedException, GeneralApiException, ShipmentNotFoundException {
+    return ShipmentState.find(getId());
   }
 }

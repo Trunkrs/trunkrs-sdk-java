@@ -1,0 +1,3 @@
+rootProject.name = 'trunkrs-sdk-java'
+include 'com.trunkrs.sdk'
+

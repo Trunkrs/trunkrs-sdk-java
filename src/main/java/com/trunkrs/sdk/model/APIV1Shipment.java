@@ -9,7 +9,7 @@ import lombok.Getter;
 
 @Getter
 class APIV1Shipment extends Shipment {
-  @SerializedName("id")
+  @SerializedName("shipmentId")
   int id;
 
   @SerializedName("trunkrsNr")

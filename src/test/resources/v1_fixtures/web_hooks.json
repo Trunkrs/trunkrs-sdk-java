@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1337,
+    "key": "X-Funky-Business",
+    "token": "SuperSecretPreSharedKey",
+    "uponShipmentCreation": false,
+    "uponLabelReady": false,
+    "uponRouteUpdate": false,
+    "uponStatusUpdate": true,
+    "uponShipmentCancellation": false
+  },
+  {
+    "id": 1338,
+    "key": "X-Funky-Business",
+    "token": "SuperSecretPreSharedKey2",
+    "uponShipmentCreation": false,
+    "uponLabelReady": false,
+    "uponRouteUpdate": false,
+    "uponStatusUpdate": false,
+    "uponShipmentCancellation": true
+  }
+]

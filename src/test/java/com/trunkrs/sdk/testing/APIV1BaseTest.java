@@ -1,16 +1,22 @@
-package com.trunkrs.sdk;
+package com.trunkrs.sdk.testing;
 
+import com.trunkrs.sdk.APICredentials;
+import com.trunkrs.sdk.TrunkrsSDK;
 import com.trunkrs.sdk.enumeration.APIVersion;
+
 import lombok.SneakyThrows;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.experimental.categories.Category;
+import org.junit.jupiter.api.BeforeEach;
 
 import java.util.UUID;
 
-public class APIV1BaseTest extends SDKBaseTest {
+@Category(V1Tests.class)
+public abstract class APIV1BaseTest extends SDKBaseTest {
   @SneakyThrows
-  @BeforeAll
-  public static void beforeTests() {
-    SDKBaseTest.beforeTests();
+  @BeforeEach
+  @Override
+  public void beforeScenario() {
+    super.beforeScenario();
 
     TrunkrsSDK.setApiVersion(APIVersion.v1);
     TrunkrsSDK.setCredentials(

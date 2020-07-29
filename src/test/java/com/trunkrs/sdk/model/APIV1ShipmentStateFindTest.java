@@ -1,6 +1,6 @@
 package com.trunkrs.sdk.model;
 
-import com.trunkrs.sdk.APIV1BaseTest;
+import com.trunkrs.sdk.testing.APIV1BaseTest;
 
 import com.trunkrs.sdk.enumeration.OwnerType;
 import com.trunkrs.sdk.enumeration.StateCode;
@@ -15,10 +15,10 @@ import lombok.val;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.*;
 
-@DisplayName("ShipmentState.find")
-public class ShipmentStateFindTest extends APIV1BaseTest {
+@DisplayName("V1 - ShipmentState.find")
+public class APIV1ShipmentStateFindTest extends APIV1BaseTest {
   @Test
   @DisplayName("Should make a request to the right endpoint")
   public void makesRequestToEndpoint()
@@ -80,5 +80,14 @@ public class ShipmentStateFindTest extends APIV1BaseTest {
       .isEqualTo("Nieuwegein");
     assertThat(state.getPackageOwner().getCountry())
       .isEqualTo("NL");
+  }
+
+  @Test
+  @DisplayName("Should throw not found exception when shipment not found")
+  public void shouldThrowWhenNotFound() {
+    mockResponse(404);
+
+    assertThatThrownBy(() -> Shipment.find(100))
+      .isInstanceOf(ShipmentNotFoundException.class);
   }
 }

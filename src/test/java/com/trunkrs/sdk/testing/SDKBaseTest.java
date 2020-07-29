@@ -1,5 +1,9 @@
-package com.trunkrs.sdk;
+package com.trunkrs.sdk.testing;
 
+import com.trunkrs.sdk.APICredentials;
+import com.trunkrs.sdk.TrunkrsSDK;
+import com.trunkrs.sdk.enumeration.APIVersion;
+import com.trunkrs.sdk.exception.UnsupportedVersionException;
 import com.trunkrs.sdk.net.ApiRequest;
 import com.trunkrs.sdk.net.ApiResource;
 import com.trunkrs.sdk.net.ApiResponse;
@@ -9,24 +13,29 @@ import com.trunkrs.sdk.util.Serializer;
 
 import lombok.SneakyThrows;
 import lombok.val;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterEach;
 import org.mockito.Mockito;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Map;
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-public class SDKBaseTest {
-  protected static HttpClient mockClient;
+public abstract class SDKBaseTest {
+  private APIVersion origVersion;
+  private APICredentials origCredentials;
 
-  @BeforeAll
-  public static void beforeTests() {
+  protected HttpClient mockClient;
+
+  @BeforeEach
+  public void beforeScenario() {
+    origVersion = TrunkrsSDK.getApiVersion();
+    origCredentials = TrunkrsSDK.getCredentials();
+
     mockClient = Mockito.mock(HttpClient.class);
     ApiResource.setHttpClient(mockClient);
   }
@@ -68,8 +77,12 @@ public class SDKBaseTest {
     return new String(Files.readAllBytes(Paths.get(resourcePath)));
   }
 
-  @AfterAll
-  public static void afterTests() {
+  @AfterEach
+  public void afterScenario() throws UnsupportedVersionException {
+    TrunkrsSDK.setCredentials(origCredentials);
+    TrunkrsSDK.setApiVersion(origVersion);
+    TrunkrsSDK.useProduction();
+
     ApiResource.setHttpClient(new OkHttpApiClient());
   }
 }

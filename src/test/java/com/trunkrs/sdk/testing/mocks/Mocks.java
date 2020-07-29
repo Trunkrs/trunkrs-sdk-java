@@ -1,4 +1,4 @@
-package com.trunkrs.sdk.mocks;
+package com.trunkrs.sdk.testing.mocks;
 
 import com.github.javafaker.Faker;
 

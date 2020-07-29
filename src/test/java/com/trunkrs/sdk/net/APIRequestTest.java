@@ -1,6 +1,6 @@
 package com.trunkrs.sdk.net;
 
-import com.trunkrs.sdk.mocks.Mocks;
+import com.trunkrs.sdk.testing.mocks.Mocks;
 import com.trunkrs.sdk.param.WebHookParams;
 import lombok.val;
 import org.junit.jupiter.api.DisplayName;

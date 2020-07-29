@@ -2,10 +2,7 @@ package com.trunkrs.sdk.model;
 
 import com.trunkrs.sdk.TrunkrsSDK;
 import com.trunkrs.sdk.enumeration.EventType;
-import com.trunkrs.sdk.exception.GeneralApiException;
-import com.trunkrs.sdk.exception.NotAuthorizedException;
-import com.trunkrs.sdk.exception.ServerValidationException;
-import com.trunkrs.sdk.exception.UnsupportedVersionException;
+import com.trunkrs.sdk.exception.*;
 import com.trunkrs.sdk.net.ApiResource;
 import com.trunkrs.sdk.param.WebHookParams;
 
@@ -44,10 +41,18 @@ public abstract class WebHook extends ApiResource {
    * @param webhookId The web hook identifier.
    * @throws NotAuthorizedException Thrown when the credentials are invalid, not set or expired.
    * @throws GeneralApiException Thrown when the API responds with an unexpected answer.
+   * @throws WebHookNotFoundException Thrown when the web hook couldn't be found.
    */
   public static void unregister(int webhookId)
-    throws NotAuthorizedException, GeneralApiException {
-    delete(String.format("webhooks/%d", webhookId));
+    throws NotAuthorizedException, GeneralApiException, WebHookNotFoundException {
+    try {
+      delete(String.format("webhooks/%d", webhookId));
+    } catch (GeneralApiException apiException) {
+      if (apiException.getStatusCode() == 404) {
+        throw new WebHookNotFoundException(webhookId);
+      }
+      throw apiException;
+    }
   }
 
   /**
@@ -102,7 +107,7 @@ public abstract class WebHook extends ApiResource {
    * @throws GeneralApiException Thrown when the API responds with an unexpected answer.
    */
   public void unregister()
-    throws NotAuthorizedException, GeneralApiException {
+    throws NotAuthorizedException, GeneralApiException, WebHookNotFoundException {
     WebHook.unregister(getId());
   }
 }

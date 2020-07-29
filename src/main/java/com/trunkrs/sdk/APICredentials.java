@@ -35,7 +35,7 @@ public abstract class APICredentials {
       @Override
       public Map<String, String> getAuthHeaders() {
         val headers = new HashMap<String, String>();
-        headers.put("X-API-KEY", apiKey);
+        headers.put("X-API-Key", apiKey);
 
         return headers;
       }

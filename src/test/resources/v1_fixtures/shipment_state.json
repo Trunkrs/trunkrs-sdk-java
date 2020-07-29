@@ -1,0 +1,18 @@
+{
+  "shipmentId": 100,
+  "currentOwner": {
+    "type": "TRUNKRS",
+    "name": "Trunkrs B.V.",
+    "address": "Liesbosch 90",
+    "postCode": "3439 LC",
+    "city": "Nieuwegein",
+    "country": "NL"
+  },
+  "stateObj": {
+    "name": "",
+    "label": "",
+    "status": "SHIPMENT_NOT_DELIVERED",
+    "reasonCode": "PARCEL_MISSING"
+  },
+  "timestamp": "2020-01-01T00:00:00.000Z"
+}

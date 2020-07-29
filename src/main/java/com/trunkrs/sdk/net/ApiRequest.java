@@ -4,7 +4,6 @@ import com.trunkrs.sdk.util.Serializer;
 
 import lombok.Builder;
 import lombok.Getter;
-import lombok.val;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -53,12 +52,14 @@ public class ApiRequest {
    */
   public String getUrl() {
     StringBuilder sb = new StringBuilder(url);
-    val hasNoBody = method == ApiResource.HTTPMethod.GET || method == ApiResource.HTTPMethod.DELETE;
 
-    if (hasNoBody && params != null) {
+    if (params != null) {
       if (!url.contains("?")) {
         sb.append("?");
+      } else {
+        sb.append("&");
       }
+
       sb.append(params.asQueryString());
     }
 

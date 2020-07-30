@@ -30,10 +30,6 @@ class APIV1PackageOwner extends PackageOwner {
 
   @Override
   public OwnerType getOwnerType() {
-    if (typeName == null || typeName.isEmpty()) {
-      return null;
-    }
-
     return ownerTypes.stream()
         .filter(type -> type.getCode().equals(typeName))
         .findAny()

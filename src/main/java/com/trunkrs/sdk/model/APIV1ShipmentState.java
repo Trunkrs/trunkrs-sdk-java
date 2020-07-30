@@ -30,10 +30,6 @@ class APIV1ShipmentState extends ShipmentState {
 
   @Override
   public StateCode getStateCode() {
-    if (state.code == null || state.code.isEmpty()) {
-      return null;
-    }
-
     return stateCodes.stream()
         .filter(stateCode -> stateCode.getCode().equals(state.code))
         .findAny()
@@ -42,10 +38,6 @@ class APIV1ShipmentState extends ShipmentState {
 
   @Override
   public StateReasonCode getReasonCode() {
-    if (state.reasonCode == null || state.reasonCode.isEmpty()) {
-      return null;
-    }
-
     return stateReasonCodes.stream()
         .filter(stateReasonCode -> stateReasonCode.getCode().equals(state.reasonCode))
         .findAny()

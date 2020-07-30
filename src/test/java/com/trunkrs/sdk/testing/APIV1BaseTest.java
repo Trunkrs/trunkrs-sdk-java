@@ -3,12 +3,10 @@ package com.trunkrs.sdk.testing;
 import com.trunkrs.sdk.APICredentials;
 import com.trunkrs.sdk.TrunkrsSDK;
 import com.trunkrs.sdk.enumeration.APIVersion;
-
+import java.util.UUID;
 import lombok.SneakyThrows;
 import org.junit.experimental.categories.Category;
 import org.junit.jupiter.api.BeforeEach;
-
-import java.util.UUID;
 
 @Category(V1Tests.class)
 public abstract class APIV1BaseTest extends SDKBaseTest {
@@ -20,11 +18,7 @@ public abstract class APIV1BaseTest extends SDKBaseTest {
 
     TrunkrsSDK.setApiVersion(APIVersion.v1);
     TrunkrsSDK.setCredentials(
-      APICredentials.from(
-        UUID.randomUUID().toString(),
-        UUID.randomUUID().toString()
-      )
-    );
+        APICredentials.from(UUID.randomUUID().toString(), UUID.randomUUID().toString()));
   }
 
   @Override

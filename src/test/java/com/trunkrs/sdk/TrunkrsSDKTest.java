@@ -1,26 +1,25 @@
 package com.trunkrs.sdk;
 
+import static org.assertj.core.api.Assertions.*;
+
 import com.trunkrs.sdk.enumeration.APIVersion;
 import com.trunkrs.sdk.exception.UnsupportedVersionException;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
-
-import static org.assertj.core.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 @DisplayName("TrunkrsSDK")
 public class TrunkrsSDKTest {
   @Test
   @DisplayName("Should not throw when selecting supported version")
   public void notThrowsWhenSupportedVersion() {
-    assertThatCode(() -> TrunkrsSDK.setApiVersion(APIVersion.v1))
-      .doesNotThrowAnyException();
+    assertThatCode(() -> TrunkrsSDK.setApiVersion(APIVersion.v1)).doesNotThrowAnyException();
   }
 
   @Test
   @DisplayName("Should throw when selecting unsupported version")
   public void throwsWhenUnsupportedVersion() {
     assertThatThrownBy(() -> TrunkrsSDK.setApiVersion(APIVersion.v2))
-      .isInstanceOf(UnsupportedVersionException.class);
+        .isInstanceOf(UnsupportedVersionException.class);
   }
 
   @Test
@@ -28,10 +27,8 @@ public class TrunkrsSDKTest {
   public void switchesToStaging() {
     TrunkrsSDK.useStaging();
 
-    assertThat(TrunkrsSDK.getBaseUrl())
-      .contains("staging-api");
-    assertThat(TrunkrsSDK.getTrackingBaseUrl())
-      .contains("staging-parcel");
+    assertThat(TrunkrsSDK.getBaseUrl()).contains("staging-api");
+    assertThat(TrunkrsSDK.getTrackingBaseUrl()).contains("staging-parcel");
   }
 
   @Test
@@ -41,9 +38,7 @@ public class TrunkrsSDKTest {
 
     TrunkrsSDK.useProduction();
 
-    assertThat(TrunkrsSDK.getBaseUrl())
-      .doesNotContain("staging-api");
-    assertThat(TrunkrsSDK.getTrackingBaseUrl())
-      .doesNotContain("staging-parcel");
+    assertThat(TrunkrsSDK.getBaseUrl()).doesNotContain("staging-api");
+    assertThat(TrunkrsSDK.getTrackingBaseUrl()).doesNotContain("staging-parcel");
   }
 }

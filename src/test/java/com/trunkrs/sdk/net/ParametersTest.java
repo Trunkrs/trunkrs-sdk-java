@@ -1,10 +1,10 @@
 package com.trunkrs.sdk.net;
 
-import lombok.val;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.DisplayName;
-
 import static org.assertj.core.api.Assertions.*;
+
+import lombok.val;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 @DisplayName("Parameters")
 public class ParametersTest {
@@ -13,11 +13,8 @@ public class ParametersTest {
   public void createsQueryString() {
     val city = "Utrecht";
 
-    val subject = Parameters.builder()
-      .with("city", city)
-      .build();
+    val subject = Parameters.builder().with("city", city).build();
 
-    assertThat(subject.asQueryString())
-      .isEqualTo("city=%s", city);
+    assertThat(subject.asQueryString()).isEqualTo("city=%s", city);
   }
 }

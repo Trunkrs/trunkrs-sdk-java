@@ -1,9 +1,8 @@
 package com.trunkrs.sdk.model;
 
 import com.google.gson.annotations.SerializedName;
-import lombok.Getter;
-
 import java.util.Date;
+import lombok.Getter;
 
 @Getter
 class APIV1TimeWindow extends TimeWindow {

@@ -1,11 +1,9 @@
 package com.trunkrs.sdk.net;
 
 import com.trunkrs.sdk.util.Form;
-
-import lombok.Builder;
-
 import java.util.HashMap;
 import java.util.Map;
+import lombok.Builder;
 
 @Builder
 public class Parameters {
@@ -21,6 +19,7 @@ public class Parameters {
 
     /**
      * Adds the parameter and its value to the parameters.
+     *
      * @param name The name of the parameters.
      * @param value The value of the parameter
      * @return The parameters instance.
@@ -31,6 +30,7 @@ public class Parameters {
 
     /**
      * Adds the parameter and its value to the parameters.
+     *
      * @param name The name of the parameters.
      * @param value The value of the parameter
      * @return The parameters instance.

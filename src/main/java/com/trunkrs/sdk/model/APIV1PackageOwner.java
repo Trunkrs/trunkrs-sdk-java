@@ -1,8 +1,7 @@
 package com.trunkrs.sdk.model;
 
-import com.trunkrs.sdk.enumeration.OwnerType;
-
 import com.google.gson.annotations.SerializedName;
+import com.trunkrs.sdk.enumeration.OwnerType;
 import lombok.Getter;
 
 class APIV1PackageOwner extends PackageOwner {
@@ -36,8 +35,8 @@ class APIV1PackageOwner extends PackageOwner {
     }
 
     return ownerTypes.stream()
-      .filter(type -> type.getCode().equals(typeName))
-      .findAny()
-      .orElse(null);
+        .filter(type -> type.getCode().equals(typeName))
+        .findAny()
+        .orElse(null);
   }
 }

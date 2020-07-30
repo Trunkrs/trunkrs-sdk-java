@@ -15,8 +15,7 @@ public enum StateReasonCode {
   parcelMissing("PARCEL_MISSING"),
   inaccessibleAddress("DELIVER_ADDRESS_NOT_ACCESSIBLE");
 
-  @Getter
-  private final String code;
+  @Getter private final String code;
 
   StateReasonCode(String code) {
     this.code = code;

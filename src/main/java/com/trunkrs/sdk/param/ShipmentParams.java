@@ -1,14 +1,12 @@
 package com.trunkrs.sdk.param;
 
+import com.google.gson.annotations.SerializedName;
 import com.trunkrs.sdk.TrunkrsSDK;
 import com.trunkrs.sdk.exception.ShipmentWithoutParcelsException;
-
-import com.google.gson.annotations.SerializedName;
-import lombok.Builder;
-import lombok.val;
-
 import java.util.ArrayList;
 import java.util.List;
+import lombok.Builder;
+import lombok.val;
 
 @Builder
 public abstract class ShipmentParams {
@@ -30,6 +28,7 @@ public abstract class ShipmentParams {
 
     /**
      * Sets the id of the time slot in which the shipment has to be announced.
+     *
      * @param timeSlotId The time slot identifier.
      * @return The builder.
      */
@@ -41,10 +40,11 @@ public abstract class ShipmentParams {
 
     /**
      * Set the collection pick-up address details.
+     *
      * @param address The address to pick-up the shipment from.
      * @return The builder.
      */
-    public ShipmentParamsBuilder pickupAddress(AddressParams address){
+    public ShipmentParamsBuilder pickupAddress(AddressParams address) {
       pickupAddress = address;
 
       return this;
@@ -52,6 +52,7 @@ public abstract class ShipmentParams {
 
     /**
      * Set the delivery address of the recipient to whom this shipment belongs.
+     *
      * @param address The address details of the recipient.
      * @return The builder.
      */
@@ -63,6 +64,7 @@ public abstract class ShipmentParams {
 
     /**
      * Add a parcel to the shipment.
+     *
      * @param parcel The parcel to be added as part of the shipment.
      * @return The builder.
      */
@@ -74,7 +76,10 @@ public abstract class ShipmentParams {
 
     /**
      * Combine all details into a new instance of {ShipmentParams}.
-     * @return The built {ShipmentParams} instance.
+     *
+     * @return The built {@link ShipmentParams} instance.
+     * @throws ShipmentWithoutParcelsException Thrown when not parcels have been added to the
+     *     builder.
      */
     public ShipmentParams build() throws ShipmentWithoutParcelsException {
       if (parcels.size() == 0) {
@@ -98,29 +103,68 @@ public abstract class ShipmentParams {
 }
 
 class APIV1ShipmentParams extends ShipmentParams {
-  @SerializedName("orderReference") String orderReference;
-  @SerializedName("timeSlotId") int timeSlotId;
-  @SerializedName("totalQuantity") int nrParcels;
+  @SerializedName("orderReference")
+  String orderReference;
 
-  @SerializedName("pickupName") String pickupCompanyName;
-  @SerializedName("pickupContact") String pickupContactName;
-  @SerializedName("pickupAddress") String pickupAddress;
-  @SerializedName("pickupPostCode") String pickupPostalCode;
-  @SerializedName("pickupCity") String pickupCity;
-  @SerializedName("pickupCountry") String pickupCountry;
-  @SerializedName("pickupEmail") String pickupEmail;
-  @SerializedName("pickupPhone") String pickupPhoneNumber;
-  @SerializedName("pickupRemarks") String pickupRemarks;
+  @SerializedName("timeSlotId")
+  int timeSlotId;
 
-  @SerializedName("deliveryName") String deliveryCompanyName;
-  @SerializedName("deliveryContact") String deliveryContactName;
-  @SerializedName("deliveryAddress") String deliveryAddress;
-  @SerializedName("deliveryPostCode") String deliveryPostalCode;
-  @SerializedName("deliveryCity") String deliveryCity;
-  @SerializedName("deliveryCountry") String deliveryCountry;
-  @SerializedName("deliveryEmail") String deliveryEmail;
-  @SerializedName("deliveryPhone") String deliveryPhoneNumber;
-  @SerializedName("deliveryRemarks") String deliveryRemarks;
+  @SerializedName("totalQuantity")
+  int nrParcels;
+
+  @SerializedName("pickupName")
+  String pickupCompanyName;
+
+  @SerializedName("pickupContact")
+  String pickupContactName;
+
+  @SerializedName("pickupAddress")
+  String pickupAddress;
+
+  @SerializedName("pickupPostCode")
+  String pickupPostalCode;
+
+  @SerializedName("pickupCity")
+  String pickupCity;
+
+  @SerializedName("pickupCountry")
+  String pickupCountry;
+
+  @SerializedName("pickupEmail")
+  String pickupEmail;
+
+  @SerializedName("pickupPhone")
+  String pickupPhoneNumber;
+
+  @SerializedName("pickupRemarks")
+  String pickupRemarks;
+
+  @SerializedName("deliveryName")
+  String deliveryCompanyName;
+
+  @SerializedName("deliveryContact")
+  String deliveryContactName;
+
+  @SerializedName("deliveryAddress")
+  String deliveryAddress;
+
+  @SerializedName("deliveryPostCode")
+  String deliveryPostalCode;
+
+  @SerializedName("deliveryCity")
+  String deliveryCity;
+
+  @SerializedName("deliveryCountry")
+  String deliveryCountry;
+
+  @SerializedName("deliveryEmail")
+  String deliveryEmail;
+
+  @SerializedName("deliveryPhone")
+  String deliveryPhoneNumber;
+
+  @SerializedName("deliveryRemarks")
+  String deliveryRemarks;
 
   void setPickupAddress(AddressParams address) {
     pickupCompanyName = address.companyName;
@@ -145,7 +189,6 @@ class APIV1ShipmentParams extends ShipmentParams {
     deliveryPhoneNumber = address.phoneNumber;
     deliveryRemarks = address.remarks;
   }
-
 
   void setParcels(List<ParcelParams> parcels) {
     val firstParcel = parcels.get(0);

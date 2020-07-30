@@ -1,5 +1,8 @@
 package com.trunkrs.sdk.testing;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
+
 import com.trunkrs.sdk.APICredentials;
 import com.trunkrs.sdk.TrunkrsSDK;
 import com.trunkrs.sdk.enumeration.APIVersion;
@@ -10,20 +13,16 @@ import com.trunkrs.sdk.net.ApiResponse;
 import com.trunkrs.sdk.net.http.HttpClient;
 import com.trunkrs.sdk.net.http.OkHttpApiClient;
 import com.trunkrs.sdk.util.Serializer;
-
-import lombok.SneakyThrows;
-import lombok.val;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.AfterEach;
-import org.mockito.Mockito;
-
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Map;
 import java.util.function.Function;
-
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import lombok.SneakyThrows;
+import lombok.val;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.mockito.Mockito;
+import sun.nio.cs.*;
 
 public abstract class SDKBaseTest {
   private APIVersion origVersion;
@@ -49,30 +48,21 @@ public abstract class SDKBaseTest {
   }
 
   protected <Body> void mockResponse(int status, Body body, Map<String, String> headers) {
-    val preppedBody = body instanceof String
-      ? (String) body
-      : Serializer.get().serialize(body);
-    val response = ApiResponse.builder()
-      .status(status)
-      .body(preppedBody)
-      .headers(headers)
-      .build();
+    val preppedBody = body instanceof String ? (String) body : Serializer.get().serialize(body);
+    val response = ApiResponse.builder().status(status).body(preppedBody).headers(headers).build();
 
-    when(mockClient.request(any(ApiRequest.class)))
-      .thenReturn(response);
+    when(mockClient.request(any(ApiRequest.class))).thenReturn(response);
   }
 
   protected void mockResponseCallback(Function<ApiRequest, ApiResponse> callback) {
 
     when(mockClient.request(any(ApiRequest.class)))
-      .then(invocation -> callback.apply(invocation.getArgument(0)));
+        .then(invocation -> callback.apply(invocation.getArgument(0)));
   }
 
   @SneakyThrows
   protected String getJsonFixture(String fixtureName) {
-    val resourcePath = getClass().getClassLoader()
-      .getResource(fixtureName)
-      .getFile();
+    val resourcePath = getClass().getClassLoader().getResource(fixtureName).getFile();
 
     return new String(Files.readAllBytes(Paths.get(resourcePath)));
   }

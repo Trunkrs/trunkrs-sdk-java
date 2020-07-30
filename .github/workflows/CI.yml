@@ -2,6 +2,18 @@ name: CI
 on:
   - push
 jobs:
+  Spotless:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v2
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      - name: Spotless
+        run: ./gradlew spotlessCheck
+
   Tests:
     runs-on: ubuntu-latest
     steps:

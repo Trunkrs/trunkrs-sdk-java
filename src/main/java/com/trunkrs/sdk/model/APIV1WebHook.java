@@ -1,8 +1,7 @@
 package com.trunkrs.sdk.model;
 
-import com.trunkrs.sdk.enumeration.EventType;
-
 import com.google.gson.annotations.SerializedName;
+import com.trunkrs.sdk.enumeration.EventType;
 import lombok.Getter;
 
 class APIV1WebHook extends WebHook {

@@ -1,12 +1,12 @@
 package com.trunkrs.sdk.net;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import lombok.val;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("ApiResponse")
 public class APIResponseTest {
@@ -26,9 +26,7 @@ public class APIResponseTest {
   })
   @DisplayName("Should reflect the status code as successful or not")
   public void reflectsSuccessful(int statusCode, boolean isSuccess) {
-    val subject = ApiResponse.builder()
-      .status(statusCode)
-      .build();
+    val subject = ApiResponse.builder().status(statusCode).build();
 
     assertThat(subject.isSuccessful()).isEqualTo(isSuccess);
   }
@@ -37,13 +35,10 @@ public class APIResponseTest {
   @DisplayName("Should deserialize a JSON body")
   public void deserializesBody() {
     val json = "{\"foo\":\"bar\"}";
-    val subject = ApiResponse.builder()
-      .body(json)
-      .build();
+    val subject = ApiResponse.builder().body(json).build();
 
     val model = subject.getModelBody(TestPayload.class);
 
-    assertThat(model.foo)
-      .isEqualTo("bar");
+    assertThat(model.foo).isEqualTo("bar");
   }
 }

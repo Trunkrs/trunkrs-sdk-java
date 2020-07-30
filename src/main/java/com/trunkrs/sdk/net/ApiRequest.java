@@ -1,28 +1,22 @@
 package com.trunkrs.sdk.net;
 
 import com.trunkrs.sdk.util.Serializer;
-
+import java.util.HashMap;
+import java.util.Map;
 import lombok.Builder;
 import lombok.Getter;
 
-import java.util.HashMap;
-import java.util.Map;
-
 @Builder
 public class ApiRequest {
-  @Getter
-  ApiResource.HTTPMethod method;
+  @Getter ApiResource.HTTPMethod method;
 
   String url;
 
-  @Getter
-  Map<String, String> headers;
+  @Getter Map<String, String> headers;
 
-  @Getter
-  Parameters params;
+  @Getter Parameters params;
 
-  @Getter
-  String body;
+  @Getter String body;
 
   public static class ApiRequestBuilder {
     private Map<String, String> getHeaders() {
@@ -48,6 +42,7 @@ public class ApiRequest {
 
   /**
    * Retrieve the URL including query string parameters.
+   *
    * @return The URL including its query string parameters.
    */
   public String getUrl() {

@@ -1,10 +1,9 @@
 package com.trunkrs.sdk.net;
 
 import com.trunkrs.sdk.util.Serializer;
+import java.util.Map;
 import lombok.Builder;
 import lombok.Data;
-
-import java.util.Map;
 
 @Builder
 @Data
@@ -15,6 +14,7 @@ public class ApiResponse {
 
   /**
    * Checks whether the status code represents a successful request.
+   *
    * @return Whether status code is successful.
    */
   public boolean isSuccessful() {
@@ -23,6 +23,7 @@ public class ApiResponse {
 
   /**
    * Retrieves the body of the request as a model representation.
+   *
    * @param modelClass The model class reference.
    * @param <Model> The model type of the response body.
    * @return The model representation of the response body.
@@ -32,7 +33,6 @@ public class ApiResponse {
       return null;
     }
 
-    return Serializer.get()
-      .deserialize(body, modelClass);
+    return Serializer.get().deserialize(body, modelClass);
   }
 }

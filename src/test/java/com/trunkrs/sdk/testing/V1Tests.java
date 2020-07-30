@@ -1,4 +1,3 @@
 package com.trunkrs.sdk.testing;
 
-public interface V1Tests {
-}
+public interface V1Tests {}

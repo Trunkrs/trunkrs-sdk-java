@@ -1,12 +1,10 @@
 package com.trunkrs.sdk.model;
 
+import com.google.gson.annotations.SerializedName;
 import com.trunkrs.sdk.enumeration.StateCode;
 import com.trunkrs.sdk.enumeration.StateReasonCode;
-
-import com.google.gson.annotations.SerializedName;
-import lombok.Getter;
-
 import java.util.Date;
+import lombok.Getter;
 
 @Getter
 class APIV1ShipmentState extends ShipmentState {
@@ -37,9 +35,9 @@ class APIV1ShipmentState extends ShipmentState {
     }
 
     return stateCodes.stream()
-      .filter(stateCode -> stateCode.getCode().equals(state.code))
-      .findAny()
-      .orElse(null);
+        .filter(stateCode -> stateCode.getCode().equals(state.code))
+        .findAny()
+        .orElse(null);
   }
 
   @Override
@@ -49,8 +47,8 @@ class APIV1ShipmentState extends ShipmentState {
     }
 
     return stateReasonCodes.stream()
-      .filter(stateReasonCode -> stateReasonCode.getCode().equals(state.reasonCode))
-      .findAny()
-      .orElse(null);
+        .filter(stateReasonCode -> stateReasonCode.getCode().equals(state.reasonCode))
+        .findAny()
+        .orElse(null);
   }
 }

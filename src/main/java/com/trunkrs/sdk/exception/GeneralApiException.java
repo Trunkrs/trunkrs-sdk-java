@@ -8,17 +8,15 @@ public class GeneralApiException extends Exception {
 
   public GeneralApiException(ApiResponse response) {
     super(
-      String.format(
-        "The Trunkrs API responded with an unexpected answer of: %d",
-        response.getStatus()
-      )
-    );
+        String.format(
+            "The Trunkrs API responded with an unexpected answer of: %d", response.getStatus()));
 
     this.response = response;
   }
 
   public GeneralApiException() {
-    super("The connection to the Trunkrs API was impossible. Please check you connection settings.");
+    super(
+        "The connection to the Trunkrs API was impossible. Please check you connection settings.");
   }
 
   public int getStatusCode() {

@@ -22,11 +22,14 @@ public class ServerValidationException extends Exception {
 
   @Override
   public String getMessage() {
-    return String.format("our payload did not match the expectation of the Trunkrs API\n\nValidation message: %s", validationMessage);
+    return String.format(
+        "our payload did not match the expectation of the Trunkrs API\n\nValidation message: %s",
+        validationMessage);
   }
 
   /**
    * Gets the underlying validation message.
+   *
    * @return The validation message returned by the API.
    */
   public String getValidationMessage() {

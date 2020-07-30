@@ -131,6 +131,7 @@ spotless {
     java {
         googleJavaFormat("1.7")
         removeUnusedImports()
+        paddedCell()
     }
 }
 

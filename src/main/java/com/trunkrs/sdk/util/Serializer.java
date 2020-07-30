@@ -7,6 +7,7 @@ import com.google.gson.GsonBuilder;
 public abstract class Serializer {
   /**
    * Gets a serializer instance.
+   *
    * @return The serializer instance.
    */
   public static Serializer get() {
@@ -15,6 +16,7 @@ public abstract class Serializer {
 
   /**
    * Serializes the object into string representation.
+   *
    * @param model The model to be serialized.
    * @param <Model> The model type to be serialized.
    * @return The serialized representation of the object.
@@ -23,6 +25,7 @@ public abstract class Serializer {
 
   /**
    * Deserializes the string representation into an object.
+   *
    * @param serialized The serialized representation.
    * @param modelClass The class reference of the model.
    * @param <Model> The target model to be de
@@ -35,9 +38,7 @@ class JsonSerializer extends Serializer {
   private static final Gson GSON = buildGson();
 
   private static Gson buildGson() {
-    return new GsonBuilder()
-      .setFieldNamingPolicy(FieldNamingPolicy.IDENTITY)
-      .create();
+    return new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.IDENTITY).create();
   }
 
   @Override

@@ -1,12 +1,11 @@
 package com.trunkrs.sdk;
 
-import lombok.val;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.DisplayName;
+import static org.assertj.core.api.Assertions.*;
 
 import java.util.UUID;
-
-import static org.assertj.core.api.Assertions.*;
+import lombok.val;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 @DisplayName("APICredentials")
 public class APICredentialsTest {
@@ -19,8 +18,8 @@ public class APICredentialsTest {
     val subject = APICredentials.from(clientId, clientSecret);
 
     assertThat(subject.getAuthHeaders())
-      .containsEntry("X-API-ClientId", clientId)
-      .containsEntry("X-API-ClientSecret", clientSecret);
+        .containsEntry("X-API-ClientId", clientId)
+        .containsEntry("X-API-ClientSecret", clientSecret);
   }
 
   @Test
@@ -30,7 +29,6 @@ public class APICredentialsTest {
 
     val subject = APICredentials.from(apiKey);
 
-    assertThat(subject.getAuthHeaders())
-      .containsEntry("X-API-Key", apiKey);
+    assertThat(subject.getAuthHeaders()).containsEntry("X-API-Key", apiKey);
   }
 }

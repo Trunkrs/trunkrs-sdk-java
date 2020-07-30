@@ -8,8 +8,7 @@ public enum OwnerType {
   customer("CUSTOMER"),
   merchant("MERCHANT");
 
-  @Getter
-  private final String code;
+  @Getter private final String code;
 
   OwnerType(String code) {
     this.code = code;

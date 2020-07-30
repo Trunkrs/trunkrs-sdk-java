@@ -1,7 +1,6 @@
 package com.trunkrs.sdk.param;
 
 import lombok.Builder;
-import lombok.Getter;
 
 @Builder
 public class ParcelParams {

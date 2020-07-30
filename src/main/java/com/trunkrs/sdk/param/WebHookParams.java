@@ -3,7 +3,6 @@ package com.trunkrs.sdk.param;
 import com.google.gson.annotations.SerializedName;
 import com.trunkrs.sdk.TrunkrsSDK;
 import com.trunkrs.sdk.enumeration.EventType;
-
 import lombok.Builder;
 import lombok.val;
 
@@ -30,6 +29,7 @@ public abstract class WebHookParams {
 
     /**
      * Set the callback URL which will be notified when the event is fired.
+     *
      * @param url The callback URL.
      * @return The builder.
      */
@@ -40,6 +40,7 @@ public abstract class WebHookParams {
 
     /**
      * Set the name of the header which will communicate the pre-defined session token.
+     *
      * @param name The name of the header to communicate the session token.
      * @return The builder.
      */
@@ -50,6 +51,7 @@ public abstract class WebHookParams {
 
     /**
      * Set the session token to communicate when the web hook is notified.
+     *
      * @param key The session token to communicate.
      * @return The builder.
      */
@@ -60,6 +62,7 @@ public abstract class WebHookParams {
 
     /**
      * The event on which to notify the configured web hook.
+     *
      * @param event The type of the event on which to notify the web hook.
      * @return The builder.
      */
@@ -70,6 +73,7 @@ public abstract class WebHookParams {
 
     /**
      * Build the parameters and construct a new instance.
+     *
      * @return The parameters.
      */
     public WebHookParams build() {

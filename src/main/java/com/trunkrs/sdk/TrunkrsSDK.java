@@ -2,12 +2,12 @@ package com.trunkrs.sdk;
 
 import com.trunkrs.sdk.enumeration.APIVersion;
 import com.trunkrs.sdk.exception.UnsupportedVersionException;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public abstract class TrunkrsSDK {
-  private static final ArrayList<APIVersion> supportedVersions = new ArrayList<>(Arrays.asList(APIVersion.v1));
+  private static final ArrayList<APIVersion> supportedVersions =
+      new ArrayList<>(Arrays.asList(APIVersion.v1));
   private static volatile APIVersion apiVersion = APIVersion.v1;
 
   private static volatile APICredentials credentials;
@@ -19,6 +19,7 @@ public abstract class TrunkrsSDK {
 
   /**
    * Gets the base url for the currently selected target.
+   *
    * @return The base URL for the currently selected target,
    */
   public static String getBaseUrl() {
@@ -27,6 +28,7 @@ public abstract class TrunkrsSDK {
 
   /**
    * Gets the tracking base url for the currently selected target.
+   *
    * @return The tracking base url for
    */
   public static String getTrackingBaseUrl() {
@@ -35,6 +37,7 @@ public abstract class TrunkrsSDK {
 
   /**
    * Gets the current SDK version.
+   *
    * @return The current SDK version
    */
   public static String getSdkVersion() {
@@ -43,6 +46,7 @@ public abstract class TrunkrsSDK {
 
   /**
    * Gets the URL safe version identifier of the selected version.
+   *
    * @return The URL safe version identifier.
    */
   public static String getVersionIdentifier() {
@@ -51,6 +55,7 @@ public abstract class TrunkrsSDK {
 
   /**
    * Returns the currently targeted API version.
+   *
    * @return The currently targeted version identifier.
    */
   public static APIVersion getApiVersion() {
@@ -59,6 +64,7 @@ public abstract class TrunkrsSDK {
 
   /**
    * Sets the API version target. Currently only v1 is supported.
+   *
    * @param version The version of the API to target.
    * @throws UnsupportedVersionException When a target that is not supported is requested.
    */
@@ -72,6 +78,7 @@ public abstract class TrunkrsSDK {
 
   /**
    * Gets the currently set credentials for internal use.s
+   *
    * @return The currently set API credentials.
    */
   public static APICredentials getCredentials() {
@@ -80,23 +87,20 @@ public abstract class TrunkrsSDK {
 
   /**
    * Sets the credentials that will be used in subsequent requests.
+   *
    * @param credentials The credentials to be used.
    */
   public static void setCredentials(APICredentials credentials) {
     TrunkrsSDK.credentials = credentials;
   }
 
-  /**
-   * Switches the SDK to the staging environment.
-   */
+  /** Switches the SDK to the staging environment. */
   public static void useStaging() {
     baseUrl = "https://staging-api.trunkrs.nl/api";
     trackingBaseUrl = "https://staging-parcel.trunkrs.nl";
   }
 
-  /**
-   * Switches the SDK to the production environment. This environment is the default setting.
-   */
+  /** Switches the SDK to the production environment. This environment is the default setting. */
   public static void useProduction() {
     baseUrl = "https://api.trunkrs.nl/api";
     trackingBaseUrl = "https://parcel.trunkrs.nl";

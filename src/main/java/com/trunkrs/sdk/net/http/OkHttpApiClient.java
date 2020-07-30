@@ -3,18 +3,16 @@ package com.trunkrs.sdk.net.http;
 import com.trunkrs.sdk.exception.GeneralApiException;
 import com.trunkrs.sdk.net.ApiRequest;
 import com.trunkrs.sdk.net.ApiResponse;
-
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import lombok.SneakyThrows;
 import lombok.val;
 import okhttp3.*;
 
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-
 public class OkHttpApiClient implements HttpClient {
-  public static final MediaType MEDIA_TYPE_JSON
-    = MediaType.parse("application/json; charset=utf-8");
+  public static final MediaType MEDIA_TYPE_JSON =
+      MediaType.parse("application/json; charset=utf-8");
 
   private static Request toOkHttpRequest(ApiRequest request) {
     val headers = new Headers.Builder();
@@ -22,9 +20,7 @@ public class OkHttpApiClient implements HttpClient {
       headers.add(pair.getKey(), pair.getValue());
     }
 
-    val requestBuilder = new Request.Builder()
-        .url(request.getUrl())
-        .headers(headers.build());
+    val requestBuilder = new Request.Builder().url(request.getUrl()).headers(headers.build());
 
     switch (request.getMethod()) {
       case GET:
@@ -60,10 +56,10 @@ public class OkHttpApiClient implements HttpClient {
 
       try (Response response = client.newCall(okHttpRequest).execute()) {
         return ApiResponse.builder()
-          .status(response.code())
-          .headers(fromOkHttpHeaders(response.headers()))
-          .body(response.body().string())
-          .build();
+            .status(response.code())
+            .headers(fromOkHttpHeaders(response.headers()))
+            .body(response.body().string())
+            .build();
       }
     } catch (IOException ioException) {
       throw new GeneralApiException();

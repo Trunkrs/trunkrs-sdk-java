@@ -19,8 +19,7 @@ public enum StateCode {
   shipmentCancelledBySender("EXCEPTION_SHIPMENT_CANCELLED_BY_SENDER"),
   getShipmentCancelledByTrunkrs("EXCEPTION_SHIPMENT_CANCELLED_BY_TRUNKRS");
 
-  @Getter
-  private final String code;
+  @Getter private final String code;
 
   StateCode(String code) {
     this.code = code;

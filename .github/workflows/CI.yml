@@ -11,9 +11,13 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
+      - name: Build Source
+        run: ./gradlew buildl
       - name: Unit tests
         run: ./gradlew test
       - name: Create XML reports
         run: ./gradlew jacocoTestReport
       - name: Upload to coveralls
+        env:
+          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
         run: ./gradlew coveralls

@@ -17,8 +17,6 @@ public abstract class APIV1BaseTest extends SDKBaseTest {
     super.beforeScenario();
 
     TrunkrsSDK.setApiVersion(APIVersion.v1);
-    TrunkrsSDK.setCredentials(
-        APICredentials.from(UUID.randomUUID().toString(), UUID.randomUUID().toString()));
   }
 
   @Override

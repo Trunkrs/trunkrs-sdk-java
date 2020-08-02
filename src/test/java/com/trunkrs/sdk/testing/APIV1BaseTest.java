@@ -1,9 +1,7 @@
 package com.trunkrs.sdk.testing;
 
-import com.trunkrs.sdk.APICredentials;
 import com.trunkrs.sdk.TrunkrsSDK;
 import com.trunkrs.sdk.enumeration.APIVersion;
-import java.util.UUID;
 import lombok.SneakyThrows;
 import org.junit.experimental.categories.Category;
 import org.junit.jupiter.api.BeforeEach;

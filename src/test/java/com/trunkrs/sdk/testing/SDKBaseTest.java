@@ -14,14 +14,12 @@ import com.trunkrs.sdk.net.ApiResponse;
 import com.trunkrs.sdk.net.http.HttpClient;
 import com.trunkrs.sdk.net.http.OkHttpApiClient;
 import com.trunkrs.sdk.util.Serializer;
-
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Map;
 import java.util.UUID;
 import java.util.function.Function;
-
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.SneakyThrows;
@@ -58,7 +56,7 @@ public abstract class SDKBaseTest {
     mockClient = Mockito.mock(HttpClient.class);
     ApiResource.setHttpClient(mockClient);
     TrunkrsSDK.setCredentials(
-      APICredentials.from(UUID.randomUUID().toString(), UUID.randomUUID().toString()));
+        APICredentials.from(UUID.randomUUID().toString(), UUID.randomUUID().toString()));
   }
 
   protected void mockResponse(int status) {

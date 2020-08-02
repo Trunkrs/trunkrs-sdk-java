@@ -55,4 +55,8 @@ public class Mocks {
         .event(EventType.onStateUpdate)
         .build();
   }
+
+  public static String getFakeTrunkrsNr() {
+    return Mocks.faker.random().nextInt(400000000, 500000000).toString();
+  }
 }

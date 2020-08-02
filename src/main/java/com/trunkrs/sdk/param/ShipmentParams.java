@@ -19,8 +19,13 @@ public abstract class ShipmentParams {
       val shipment = new APIV1ShipmentParams();
       shipment.timeSlotId = timeSlotId;
 
-      shipment.setDeliveryAddress(deliveryAddress);
-      shipment.setPickupAddress(pickupAddress);
+      if (deliveryAddress != null) {
+        shipment.setDeliveryAddress(deliveryAddress);
+      }
+      if (pickupAddress != null) {
+        shipment.setPickupAddress(pickupAddress);
+      }
+
       shipment.setParcels(parcels);
 
       return shipment;

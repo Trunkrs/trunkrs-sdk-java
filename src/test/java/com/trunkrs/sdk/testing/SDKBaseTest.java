@@ -81,7 +81,7 @@ public abstract class SDKBaseTest {
   }
 
   @SneakyThrows
-  protected String getJsonFixture(String fixtureName) {
+  protected String getJsonResource(String fixtureName) {
     val resourcePath = getClass().getClassLoader().getResource(fixtureName).getFile();
 
     return new String(Files.readAllBytes(Paths.get(resourcePath)), StandardCharsets.UTF_8);

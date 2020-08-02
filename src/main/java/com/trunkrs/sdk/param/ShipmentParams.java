@@ -11,6 +11,7 @@ import lombok.val;
 @Builder
 public abstract class ShipmentParams {
   public static class ShipmentParamsBuilder {
+    private int timeSlotId;
     private AddressParams pickupAddress;
     private AddressParams deliveryAddress;
     private List<ParcelParams> parcels = new ArrayList<>();
@@ -98,12 +99,6 @@ public abstract class ShipmentParams {
           return null;
       }
     }
-  }
-
-  private int timeSlotId;
-
-  ShipmentParams() {
-    timeSlotId = 0;
   }
 }
 

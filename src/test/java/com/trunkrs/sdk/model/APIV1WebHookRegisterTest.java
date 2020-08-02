@@ -9,13 +9,11 @@ import com.trunkrs.sdk.net.ApiResource;
 import com.trunkrs.sdk.net.ApiResponse;
 import com.trunkrs.sdk.testing.APIV1BaseTest;
 import com.trunkrs.sdk.testing.mocks.Mocks;
-import java.util.List;
 import lombok.val;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-@DisplayName("V1 - Shipment.create")
-public class APIV1ShipmentCreateTest extends APIV1BaseTest {
+public class APIV1WebHookRegisterTest extends APIV1BaseTest {
   @Test
   @DisplayName("Should make a POST request")
   public void makesPostRequest()
@@ -24,10 +22,10 @@ public class APIV1ShipmentCreateTest extends APIV1BaseTest {
         request -> {
           assertThat(request).hasFieldOrPropertyWithValue("method", ApiResource.HTTPMethod.POST);
 
-          return ApiResponse.builder().status(200).body(getJsonFixture("shipments.json")).build();
+          return ApiResponse.builder().status(200).body(getJsonFixture("web_hook.json")).build();
         });
 
-    Shipment.create(Mocks.getFakeShipment());
+    WebHook.register(Mocks.getFakeWebHook());
   }
 
   @Test
@@ -36,22 +34,22 @@ public class APIV1ShipmentCreateTest extends APIV1BaseTest {
       throws NotAuthorizedException, GeneralApiException, ServerValidationException {
     mockResponseCallback(
         request -> {
-          assertThat(request.getUrl()).endsWith("shipments");
+          assertThat(request.getUrl()).endsWith("webhooks");
 
-          return ApiResponse.builder().status(200).body(getJsonFixture("shipments.json")).build();
+          return ApiResponse.builder().status(200).body(getJsonFixture("web_hook.json")).build();
         });
 
-    Shipment.create(Mocks.getFakeShipment());
+    WebHook.register(Mocks.getFakeWebHook());
   }
 
   @Test
-  @DisplayName("Should return a list of shipments")
+  @DisplayName("Should return a V1 webhook instance")
   public void returnsList()
       throws NotAuthorizedException, GeneralApiException, ServerValidationException {
-    mockResponse(200, getJsonFixture("shipments.json"));
+    mockResponse(200, getJsonFixture("web_hook.json"));
 
-    val result = Shipment.create(Mocks.getFakeShipment());
+    val result = WebHook.register(Mocks.getFakeWebHook());
 
-    assertThat(result).isInstanceOf(List.class).hasSize(1);
+    assertThat(result).isInstanceOf(APIV1WebHook.class);
   }
 }

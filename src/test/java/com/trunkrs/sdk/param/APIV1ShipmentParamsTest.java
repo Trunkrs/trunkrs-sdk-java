@@ -73,4 +73,11 @@ public class APIV1ShipmentParamsTest extends APIV1BaseTest {
         .hasFieldOrPropertyWithValue("orderReference", parcel1.reference)
         .hasFieldOrPropertyWithValue("nrParcels", 2);
   }
+
+  @Test
+  @DisplayName("Should throw when no parcels added")
+  public void throwsWOParcels() {
+    assertThatThrownBy(() -> ShipmentParams.builder().build())
+        .isInstanceOf(ShipmentWithoutParcelsException.class);
+  }
 }

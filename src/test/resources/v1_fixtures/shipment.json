@@ -1,0 +1,38 @@
+{
+  "shipmentId": 100,
+  "trunkrsNr": "400026435",
+  "label": "https://some.url/with/the/label",
+  "sender": {
+    "name": "Freddy's Fresh Fish shop",
+    "email": "fish@fredys.nl",
+    "phoneNumber": "020-freddys",
+    "address": "Fishlane 17",
+    "postCode": "1000AB",
+    "city": "Amsterdam",
+    "country": "NL",
+    "remarks": "Go around the back!"
+  },
+  "recipient": {
+    "name": "The Dude",
+    "email": "strike@dude.com",
+    "phoneNumber": "030-dude",
+    "address": "Bowling alley 6",
+    "postCode": "3454AB",
+    "city": "Utrecht",
+    "country": "NL",
+    "remarks": "DND when throwing ball!"
+  },
+  "timeSlot": {
+    "id": 20202,
+    "senderId": 1022983,
+    "dataWindow": "2020-07-29T10:00:00.000Z",
+    "collectionWindow": {
+      "from": "2020-07-29T10:00:00.000Z",
+      "to": "2020-07-29T11:00:00.000Z"
+    },
+    "deliveryWindow": {
+      "from": "2020-07-29T15:00:00.000Z",
+      "to": "2020-07-29T20:00:00.000Z"
+    }
+  }
+}

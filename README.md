@@ -22,8 +22,14 @@ dependencies {
 ```
 
 #### Maven:
-```
-...
+```xml
+<dependencies>
+  <dependency>
+    <groupId>com.trunkrs</groupId>
+    <artifactId>trunkrs-sdk</artifactId>
+    <version>1.0.0</version>
+  </dependency>
+</dependencies>
 ```
 
 ## Getting started

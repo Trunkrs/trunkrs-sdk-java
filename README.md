@@ -12,7 +12,7 @@ Java 1.8 and later.
 
 ## Installation
 
-You can install the SDK via through Maven or Gradle. Simply add the implementation line to your Gradle dependencies.
+You can install the SDK through Maven or Gradle. Simply add the SDK to your project dependencies.
 
 #### Gradle:
 ```gradle

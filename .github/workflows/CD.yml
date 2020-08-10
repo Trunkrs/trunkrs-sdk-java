@@ -3,6 +3,7 @@ on:
   push:
     tags:
       - '*'
+
 jobs:
   Deploy:
     runs-on: ubuntu-latest
@@ -16,8 +17,8 @@ jobs:
         env:
           NEXUS_USERNAME: ${{ secrets.NEXUS_USERNAME }}
           NEXUS_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
-      - name: Deploy to Maven
+      - name: Upload to Maven
         run: |
           VERSION_NAME=$(echo "${GITHUB_REF}" | cut -d "/" -f3)
           echo "Deploying ${VERSION_NAME} to maven..."
-          ./gradlew -PVERSION_NAME=${VERSION_NAME} releaseRepository
+          ./gradlew -PVERSION_NAME=${VERSION_NAME} clean build uploadArchives

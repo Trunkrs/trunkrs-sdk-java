@@ -13,26 +13,19 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
+      - name: Prepare GPG
+        env:
+          MVN_GPG_SECRING: ${{ secrets.MVN_GPG_SECRING }}
+        run: |
+          echo $MVN_GPG_SECRING | base64 --decode > secring.gpg
+      - name: Build & Upload to Maven
         env:
           NEXUS_USERNAME: ${{ secrets.NEXUS_USERNAME }}
           NEXUS_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
-      - name: Prepare GPG
-        env:
-          MVN_GPG_PUBRING: ${{ secrets.MVN_GPG_PUBRING }}
-          MVN_GPG_SECRING: ${{ secrets.MVN_GPG_SECRING }}
-          MVN_GPG_FINGERPRINT: ${{ secrets.MVN_GPG_FINGERPRINT }}
-        run: |
-          mkdir ~/.gnupg
-          echo $MVN_GPG_PUBRING | base64 --decode > ~/.gnupg/pubring.kbx
-          echo $MVN_GPG_SECRING | base64 --decode > ~/.gnupg/secring.kbx
-          gpg --list-keys > /dev/null
-          echo "default-key ${MVN_GPG_FINGERPRINT}" | tee -a ~/.gnupg/gpg.conf > /dev/null
-      - name: Build & Upload to Maven
-        env:
-          MVN_GPG_FINGERPRINT: ${{ secrets.MVN_GPG_FINGERPRINT }}
+          MVN_GPG_KEYID: ${{ secrets.MVN_GPG_KEYID }}
           MVN_GPG_PASSWORD: ${{ secrets.MVN_GPG_PASSWORD }}
         run: |
           VERSION_NAME=$(echo "${GITHUB_REF}" | cut -d "/" -f3)
           VERSION_NAME=1.0.0-SNAPSHOT
           echo "Deploying ${VERSION_NAME} to maven..."
-          ./gradlew -PVERSION_NAME="${VERSION_NAME}" -Psigning.keyId="${MVN_GPG_FINGERPRINT}" -Psigning.password="${MVN_GPG_PASSWORD}" -Psigning.secretKeyRingFile="~/.gnupg/pubring.kbx" clean build uploadArchives
+          ./gradlew -PVERSION_NAME="${VERSION_NAME}" -Psigning.keyId="${MVN_GPG_KEYID}" -Psigning.password="${MVN_GPG_PASSWORD}" -Psigning.secretKeyRingFile="secring.gpg" clean build uploadArchives

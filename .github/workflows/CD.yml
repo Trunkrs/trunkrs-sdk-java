@@ -3,7 +3,6 @@ on:
   push:
     tags:
       - '*'
-
 jobs:
   Deploy:
     runs-on: ubuntu-latest
@@ -17,8 +16,16 @@ jobs:
         env:
           NEXUS_USERNAME: ${{ secrets.NEXUS_USERNAME }}
           NEXUS_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
+      - name: Prepare GPG
+        env:
+          MVN_GPG_SECRING: ${{ secrets.MVN_GPG_SECRING }}
+        run: |
+          echo $MVN_GPG_SECRING | base64 > ~/.gnupg/secring.kbx
       - name: Upload to Maven
+        env:
+          MVN_GPG_KEYID: ${{ secrets.MVN_GPG_KEYID }}
+          MVN_GPG_PASSWORD: ${{ secrets.MVN_GPG_PASSWORD }}
         run: |
           VERSION_NAME=$(echo "${GITHUB_REF}" | cut -d "/" -f3)
           echo "Deploying ${VERSION_NAME} to maven..."
-          ./gradlew -PVERSION_NAME=${VERSION_NAME} clean build uploadArchives
+          ./gradlew -PVERSION_NAME=${VERSION_NAME} -Psigning.keyId=${MVN_GPG_KEYID} -Psigning.password=${MVN_GPG_PASSWORD} -Psigning.secretKeyRingFile="~/.gnupg/secring.kbx" clean build uploadArchives

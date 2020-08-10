@@ -20,7 +20,7 @@ jobs:
         env:
           MVN_GPG_SECRING: ${{ secrets.MVN_GPG_SECRING }}
         run: |
-          echo $MVN_GPG_SECRING | base64 > ~/.gnupg/secring.kbx
+          echo $MVN_GPG_SECRING | base64 --decode > ~/.gnupg/secring.kbx
       - name: Upload to Maven
         env:
           MVN_GPG_KEYID: ${{ secrets.MVN_GPG_KEYID }}

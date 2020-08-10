@@ -1,8 +1,8 @@
 name: CD
-on:
-  push:
-    tags:
-      - '*'
+on: [push]
+#  push:
+#    tags:
+#      - '*'
 jobs:
   Deploy:
     runs-on: ubuntu-latest
@@ -21,12 +21,13 @@ jobs:
           MVN_GPG_SECRING: ${{ secrets.MVN_GPG_SECRING }}
         run: |
           mkdir ~/.gnupg
-          echo $MVN_GPG_SECRING | base64 --decode > ~/.gnupg/secring.kbx
-      - name: Upload to Maven
+          echo $MVN_GPG_SECRING | base64 --decode > ~/.gnupg/pubring.kbx
+      - name: Build & Upload to Maven
         env:
           MVN_GPG_KEYID: ${{ secrets.MVN_GPG_KEYID }}
           MVN_GPG_PASSWORD: ${{ secrets.MVN_GPG_PASSWORD }}
         run: |
           VERSION_NAME=$(echo "${GITHUB_REF}" | cut -d "/" -f3)
+          VERSION_NAME=1.0.0-SNAPSHOT
           echo "Deploying ${VERSION_NAME} to maven..."
-          ./gradlew -PVERSION_NAME="${VERSION_NAME}" -Psigning.keyId="${MVN_GPG_KEYID}" -Psigning.password="${MVN_GPG_PASSWORD}" -Psigning.secretKeyRingFile="~/.gnupg/secring.kbx" clean build uploadArchives
+          ./gradlew -PVERSION_NAME="${VERSION_NAME}" -Psigning.keyId="${MVN_GPG_KEYID}" -Psigning.password="${MVN_GPG_PASSWORD}" -Psigning.secretKeyRingFile="~/.gnupg/pubring.kbx" clean build uploadArchives

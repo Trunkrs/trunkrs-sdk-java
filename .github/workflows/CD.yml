@@ -20,11 +20,13 @@ jobs:
         env:
           MVN_GPG_PUBRING: ${{ secrets.MVN_GPG_PUBRING }}
           MVN_GPG_SECRING: ${{ secrets.MVN_GPG_SECRING }}
+          MVN_GPG_FINGERPRINT: ${{ secrets.MVN_GPG_FINGERPRINT }}
         run: |
           mkdir ~/.gnupg
           echo $MVN_GPG_PUBRING | base64 --decode > ~/.gnupg/pubring.kbx
           echo $MVN_GPG_SECRING | base64 --decode > ~/.gnupg/secring.kbx
-          gpg --list-keys
+          gpg --list-keys > /dev/null
+          echo "default-key ${MVN_GPG_FINGERPRINT}" | tee -a ~/.gnupg/gpg.conf > /dev/null
       - name: Build & Upload to Maven
         env:
           MVN_GPG_KEYID: ${{ secrets.MVN_GPG_KEYID }}

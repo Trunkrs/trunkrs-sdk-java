@@ -18,10 +18,13 @@ jobs:
           NEXUS_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
       - name: Prepare GPG
         env:
+          MVN_GPG_PUBRING: ${{ secrets.MVN_GPG_PUBRING }}
           MVN_GPG_SECRING: ${{ secrets.MVN_GPG_SECRING }}
         run: |
           mkdir ~/.gnupg
-          echo $MVN_GPG_SECRING | base64 --decode > ~/.gnupg/pubring.kbx
+          echo $MVN_GPG_PUBRING | base64 --decode > ~/.gnupg/pubring.kbx
+          echo $MVN_GPG_SECRING | base64 --decode > ~/.gnupg/secring.kbx
+          gpg --list-keys
       - name: Build & Upload to Maven
         env:
           MVN_GPG_KEYID: ${{ secrets.MVN_GPG_KEYID }}

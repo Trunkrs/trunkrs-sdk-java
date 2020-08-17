@@ -28,4 +28,4 @@ jobs:
           VERSION_NAME=$(echo "${GITHUB_REF}" | cut -d "/" -f3)
           VERSION_NAME=1.0.0-SNAPSHOT
           echo "Deploying ${VERSION_NAME} to maven..."
-          ./gradlew -PVERSION_NAME="${VERSION_NAME}" -Psigning.keyId="${MVN_GPG_KEYID}" -Psigning.password="${MVN_GPG_PASSWORD}" -Psigning.secretKeyRingFile="secring.gpg" clean build uploadArchives
+          ./gradlew -PVERSION_NAME="${VERSION_NAME}" -Psigning.keyId="${MVN_GPG_KEYID}" -Psigning.gnupg.keyName="${MVN_GPG_KEYID}" -Psigning.gnupg.passphrase="${MVN_GPG_PASSWORD}" -Psigning.password="${MVN_GPG_PASSWORD}" -Psigning.secretKeyRingFile="secring.gpg" clean build uploadArchives

@@ -17,7 +17,7 @@ You can install the SDK through Maven or Gradle. Simply add the SDK to your proj
 #### Gradle:
 ```gradle
 dependencies {
-    implementation group: "com.trunkrs", name: "trunkrs-sdk", version: "1.0.0"
+    implementation group: "com.trunkrs", name: "sdk", version: "1.0.0"
 }
 ```
 
@@ -26,7 +26,7 @@ dependencies {
 <dependencies>
   <dependency>
     <groupId>com.trunkrs</groupId>
-    <artifactId>trunkrs-sdk</artifactId>
+    <artifactId>sdk</artifactId>
     <version>1.0.0</version>
   </dependency>
 </dependencies>

@@ -17,11 +17,11 @@ public abstract class APIV1BaseTest extends SDKBaseTest {
     TrunkrsSDK.setApiVersion(APIVersion.v1);
   }
 
-  protected String getJsonFixture(String fixtureName) {
-    return super.getJsonResource(String.format("v1_fixtures/%s", fixtureName));
+  protected byte[] getJsonFixture(String fixtureName) {
+    return getJsonResource(String.format("v1_fixtures/%s", fixtureName));
   }
 
-  protected String getJsonPayload(String fixtureName) {
-    return super.getJsonResource(String.format("v1_payloads/%s", fixtureName));
+  protected byte[] getJsonPayload(String fixtureName) {
+    return getJsonResource(String.format("v1_payloads/%s", fixtureName));
   }
 }

@@ -10,7 +10,7 @@ import lombok.val;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.binary.Hex;
 
-public abstract class StringUtils {
+public class StringUtils {
   /**
    * URL encodes the specified string value.
    *
@@ -19,10 +19,6 @@ public abstract class StringUtils {
    */
   @SneakyThrows(UnsupportedEncodingException.class)
   public static String urlEncode(String value) {
-    if (value == null) {
-      return null;
-    }
-
     return URLEncoder.encode(value, StandardCharsets.UTF_8.name())
         .replaceAll("%5B", "[")
         .replaceAll("%5D", "]");

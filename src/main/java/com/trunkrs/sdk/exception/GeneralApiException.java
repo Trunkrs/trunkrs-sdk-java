@@ -20,9 +20,6 @@ public class GeneralApiException extends Exception {
   }
 
   public int getStatusCode() {
-    if (response == null) {
-      return -1;
-    }
     return response.getStatus();
   }
 }

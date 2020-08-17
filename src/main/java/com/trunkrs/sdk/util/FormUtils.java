@@ -5,7 +5,7 @@ import static com.trunkrs.sdk.util.StringUtils.urlEncode;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public abstract class FormUtils {
+public class FormUtils {
   /**
    * Creates a query string from the the specified map.
    *

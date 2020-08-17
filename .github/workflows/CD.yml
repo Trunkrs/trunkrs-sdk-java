@@ -15,9 +15,12 @@ jobs:
           java-version: 1.8
       - name: Prepare GPG
         env:
+          MVN_GPG_PUBRING: ${{ secrets.GPG_PUBRING_KBX }}
           MVN_GPG_SECRING: ${{ secrets.MVN_GPG_SECRING }}
         run: |
-          echo $MVN_GPG_SECRING | base64 --decode > secring.gpg
+          mkdir ~/.gnupg
+          echo $MVN_GPG_PUBRING | base64 --decode > ~/.gnupg/pubring.kbx
+          echo $MVN_GPG_SECRING | base64 --decode > ~/.gnupg/secring.gpg
       - name: Build & Upload to Maven
         env:
           NEXUS_USERNAME: ${{ secrets.NEXUS_USERNAME }}
@@ -28,4 +31,4 @@ jobs:
           VERSION_NAME=$(echo "${GITHUB_REF}" | cut -d "/" -f3)
           VERSION_NAME=1.0.0-SNAPSHOT
           echo "Deploying ${VERSION_NAME} to maven..."
-          ./gradlew -PVERSION_NAME="${VERSION_NAME}" -Psigning.keyId="${MVN_GPG_KEYID}" -Psigning.gnupg.keyName="${MVN_GPG_KEYID}" -Psigning.gnupg.passphrase="${MVN_GPG_PASSWORD}" -Psigning.password="${MVN_GPG_PASSWORD}" -Psigning.secretKeyRingFile="secring.gpg" clean build uploadArchives
+          ./gradlew -PVERSION_NAME="${VERSION_NAME}" -Psigning.keyId="${MVN_GPG_KEYID}" -Psigning.gnupg.keyName="${MVN_GPG_KEYID}" -Psigning.gnupg.passphrase="${MVN_GPG_PASSWORD}" -Psigning.password="${MVN_GPG_PASSWORD}" -Psigning.secretKeyRingFile="~/.gnupg/secring.gpg" clean build uploadArchives

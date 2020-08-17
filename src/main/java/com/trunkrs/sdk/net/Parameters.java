@@ -1,6 +1,6 @@
 package com.trunkrs.sdk.net;
 
-import com.trunkrs.sdk.util.Form;
+import com.trunkrs.sdk.util.FormUtils;
 import java.util.HashMap;
 import java.util.Map;
 import lombok.Builder;
@@ -42,6 +42,6 @@ public class Parameters {
   }
 
   String asQueryString() {
-    return Form.createQueryString(params);
+    return FormUtils.createQueryString(params);
   }
 }

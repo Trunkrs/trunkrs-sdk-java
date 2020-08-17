@@ -55,10 +55,12 @@ public class OkHttpApiClient implements HttpClient {
       val okHttpRequest = toOkHttpRequest(request);
 
       try (Response response = client.newCall(okHttpRequest).execute()) {
+        val byteRes = response.body().bytes();
+
         return ApiResponse.builder()
             .status(response.code())
             .headers(fromOkHttpHeaders(response.headers()))
-            .body(response.body().string())
+            .body(byteRes)
             .build();
       }
     } catch (IOException ioException) {

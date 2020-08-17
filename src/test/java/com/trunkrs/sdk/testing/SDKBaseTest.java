@@ -14,6 +14,8 @@ import com.trunkrs.sdk.net.ApiResponse;
 import com.trunkrs.sdk.net.http.HttpClient;
 import com.trunkrs.sdk.net.http.OkHttpApiClient;
 import com.trunkrs.sdk.util.Serializer;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -48,6 +50,13 @@ public abstract class SDKBaseTest {
     String foo;
   }
 
+  public static InputStream createInputStream(String stringBody) {
+    val stream = new ByteArrayInputStream(stringBody.getBytes());
+    stream.reset();
+
+    return stream;
+  }
+
   @BeforeEach
   public void beforeScenario() {
     origVersion = TrunkrsSDK.getApiVersion();
@@ -68,23 +77,28 @@ public abstract class SDKBaseTest {
   }
 
   protected <Body> void mockResponse(int status, Body body, Map<String, String> headers) {
-    val preppedBody = body instanceof String ? (String) body : Serializer.get().serialize(body);
+    val preppedBody =
+        body instanceof String
+            ? ((String) body).getBytes()
+            : body instanceof byte[] ? (byte[]) body : Serializer.get().serialize(body).getBytes();
+
     val response = ApiResponse.builder().status(status).body(preppedBody).headers(headers).build();
 
     when(mockClient.request(any(ApiRequest.class))).thenReturn(response);
   }
 
   protected void mockResponseCallback(Function<ApiRequest, ApiResponse> callback) {
-
     when(mockClient.request(any(ApiRequest.class)))
         .then(invocation -> callback.apply(invocation.getArgument(0)));
   }
 
   @SneakyThrows
-  protected String getJsonResource(String fixtureName) {
+  protected byte[] getJsonResource(String fixtureName) {
     val resourcePath = getClass().getClassLoader().getResource(fixtureName).getFile();
+    val resourceData =
+        new String(Files.readAllBytes(Paths.get(resourcePath)), StandardCharsets.UTF_8);
 
-    return new String(Files.readAllBytes(Paths.get(resourcePath)), StandardCharsets.UTF_8);
+    return resourceData.getBytes();
   }
 
   @AfterEach

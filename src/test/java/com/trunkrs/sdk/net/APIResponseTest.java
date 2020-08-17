@@ -35,8 +35,7 @@ public class APIResponseTest {
   @DisplayName("Should deserialize a JSON body")
   public void deserializesBody() {
     val json = "{\"foo\":\"bar\"}";
-    val subject = ApiResponse.builder().body(json).build();
-
+    val subject = ApiResponse.builder().body(json.getBytes()).build();
     val model = subject.getModelBody(TestPayload.class);
 
     assertThat(model.foo).isEqualTo("bar");

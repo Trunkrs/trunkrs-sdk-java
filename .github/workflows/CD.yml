@@ -1,8 +1,8 @@
 name: CD
-on: [push]
-#  push:
-#    tags:
-#      - '*'
+on:
+  push:
+    tags:
+      - '*'
 jobs:
   Deploy:
     runs-on: ubuntu-latest
@@ -29,6 +29,5 @@ jobs:
           MVN_GPG_PASSWORD: ${{ secrets.MVN_GPG_PASSWORD }}
         run: |
           VERSION_NAME=$(echo "${GITHUB_REF}" | cut -d "/" -f3)
-          VERSION_NAME=1.0.0
           echo "Deploying ${VERSION_NAME} to maven..."
           ./gradlew -PVERSION_NAME="${VERSION_NAME}" -Psigning.keyId="${MVN_GPG_KEYID}" -Psigning.gnupg.keyName="${MVN_GPG_KEYID}" -Psigning.gnupg.passphrase="${MVN_GPG_PASSWORD}" -Psigning.password="${MVN_GPG_PASSWORD}" -Psigning.secretKeyRingFile="~/.gnupg/secring.gpg" clean build uploadArchives

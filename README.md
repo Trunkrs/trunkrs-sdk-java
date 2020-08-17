@@ -189,3 +189,26 @@ final WebHook firstWebHook = webHooks.get(0);
 
 firstWebHook.unregister();
 ```
+
+## Labels
+
+### Retrieve the label for a single shipment
+
+The `Label` for a single shipment can be retrieved by a combination of the Trunkrs number and the postal code.
+Both ZPL and PDF labels are supported through this interface.
+
+```java
+final Label pdfLabel = Label.download(trunkrsNr, postalCode, LabelType.PDF);
+final Label zplLabel = Label.download(trunkrsNr, postalCode, LabelType.ZPL);
+```
+
+### Batch retrieve multiple shipment labels
+
+Retrieve labels for multiple shipments by supplying a list of Trunkrs numbers.
+
+```java
+final Label batchedLabel = Label.downloadBatch(trunkrsNrs, LabelType.PDF);
+```
+
+> At this moment only PDF labels are supported when using the batching endpoint.
+> Every label will be placed on its own page in a single document.

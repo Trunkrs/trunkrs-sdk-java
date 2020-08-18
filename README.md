@@ -2,6 +2,7 @@
 
 ![CI](https://github.com/Trunkrs/trunkrs-sdk-java/workflows/CI/badge.svg?branch=master)
 [![Coverage Status](https://coveralls.io/repos/github/Trunkrs/trunkrs-sdk-java/badge.svg)](https://coveralls.io/github/Trunkrs/trunkrs-sdk-java)
+[![Maven Central](https://img.shields.io/maven-central/v/com.trunkrs/sdk)](https://mvnrepository.com/artifact/com.trunkrs/sdk)
 ![License](https://poser.pugx.org/trunkrs/sdk/license)
 
 The Trunkrs software development kit for the public client SDK. With this Java SDK you can manage your shipments, shipment states and webhooks within our system.
